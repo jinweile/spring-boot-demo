@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <!-- daobean Start -->
+    <bean id="CalllimittimesDao" class="com.example.myproject.db.dao.imp.CalllimittimesDao">
+        <property name="mapper">
+            <ref bean="sqlMapClient"/>
+        </property>
+    </bean>
+    <!-- proxy -->
+    <bean id="ICalllimittimesDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="proxyInterfaces">
+            <value>com.example.myproject.db.dao.intf.ICalllimittimesDao</value>
+        </property>
+        <property name="target">
+            <ref bean="CalllimittimesDao"/>
+        </property>
+    </bean>
+    <!-- daobean End -->
+    <!-- serviebean Start -->
+    <bean name="CalllimittimesService" class="com.example.myproject.db.service.imp.CalllimittimesService">
+        <property name="CalllimittimesDao">
+            <ref bean="ICalllimittimesDao"/>
+        </property>
+    </bean>
+    <!-- proxy,tran -->
+    <bean id="ICalllimittimesService" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="singleton">
+            <value>true</value>
+        </property>
+        <property name="proxyInterfaces">
+            <value>com.example.myproject.db.service.intf.ICalllimittimesService</value>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>transactionInterceptor</value>
+                <value>CalllimittimesService</value>
+            </list>
+        </property>
+        <property name="proxyTargetClass">
+            <value>true</value>
+        </property>
+    </bean>
+    <!-- serviebean End -->
+</beans>

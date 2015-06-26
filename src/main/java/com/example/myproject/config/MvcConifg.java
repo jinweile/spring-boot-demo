@@ -41,7 +41,7 @@ public class MvcConifg extends WebMvcConfigurationSupport {
         return viewResolver;
     }
 
-    /*@Bean
+    @Bean
     public VelocityConfigurer velocityConfigure(){
         VelocityConfigurer configure = new VelocityConfigurer();
         configure.setResourceLoaderPath("classpath:/velocity/");
@@ -50,7 +50,7 @@ public class MvcConifg extends WebMvcConfigurationSupport {
         prop.put("output.encoding", "UTF-8");
         configure.setVelocityProperties(prop);
         return configure;
-    }*/
+    }
 
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {

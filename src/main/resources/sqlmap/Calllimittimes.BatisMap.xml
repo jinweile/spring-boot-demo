@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap
+        PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Calllimittimes">
+
+    <typeAlias alias="Calllimittimes" type="com.example.myproject.db.model.Calllimittimes"/>
+
+    <resultMap id="Calllimittimes-FullResultMap" class="Calllimittimes">
+        <result property="iD" column="ID"/>
+        <result property="supplierID" column="SupplierID"/>
+        <result property="restUrlID" column="RestUrlID"/>
+        <result property="mtimes" column="mtimes"/>
+        <result property="htimes" column="htimes"/>
+        <result property="dtimes" column="dtimes"/>
+        <result property="isUsed" column="IsUsed"/>
+    </resultMap>
+
+    <select id="Calllimittimes-GetCount" parameterClass="java.util.Map" resultClass="Integer">
+        SELECT count(1) FROM calllimittimes
+        <dynamic prepend="WHERE">
+            <isPropertyAvailable property="supplierID" prepend="and">
+                SupplierID = #supplierID#
+            </isPropertyAvailable>
+            <isPropertyAvailable property="restUrlID" prepend="and">
+                RestUrlID = #restUrlID#
+            </isPropertyAvailable>
+            <isPropertyAvailable property="mtimes" prepend="and">
+                mtimes = #mtimes#
+            </isPropertyAvailable>
+            <isPropertyAvailable property="htimes" prepend="and">
+                htimes = #htimes#
+            </isPropertyAvailable>
+            <isPropertyAvailable property="dtimes" prepend="and">
+                dtimes = #dtimes#
+            </isPropertyAvailable>
+            <isPropertyAvailable property="isUsed" prepend="and">
+                IsUsed = #isUsed#
+            </isPropertyAvailable>
+        </dynamic>
+    </select>
+
+    <select id="Calllimittimes-FindAll" resultMap="Calllimittimes-FullResultMap">
+        SELECT
+        ID
+        , SupplierID
+        , RestUrlID
+        , mtimes
+        , htimes
+        , dtimes
+        , IsUsed
+        FROM calllimittimes
+    </select>
+
+    <select id="Calllimittimes-Find" parameterClass="Integer" resultMap="Calllimittimes-FullResultMap">
+        SELECT
+        ID
+        , SupplierID
+        , RestUrlID
+        , mtimes
+        , htimes
+        , dtimes
+        , IsUsed
+        FROM calllimittimes
+        WHERE
+        (ID = #iD#)
+    </select>
+
+    <insert id="Calllimittimes-Insert" parameterClass="Calllimittimes">
+        INSERT INTO calllimittimes (
+        SupplierID
+        , RestUrlID
+        , mtimes
+        , htimes
+        , dtimes
+        , IsUsed
+        ) VALUES (
+        #supplierID#
+        , #restUrlID#
+        , #mtimes#
+        , #htimes#
+        , #dtimes#
+        , #isUsed#
+        )
+        <selectKey resultClass="Integer" keyProperty="iD">
+            <!--mysql-->
+            select LAST_INSERT_ID() as value
+        </selectKey>
+    </insert>
+
+    <insert id="Calllimittimes-InsertBatch" parameterClass="java.util.List">
+        INSERT INTO calllimittimes (
+        SupplierID
+        , RestUrlID
+        , mtimes
+        , htimes
+        , dtimes
+        , IsUsed
+        ) VALUES
+        <iterate conjunction="," open="" close="">
+            <![CDATA[(
+			 #[].supplierID#
+			, #[].restUrlID#
+			, #[].mtimes#
+			, #[].htimes#
+			, #[].dtimes#
+			, #[].isUsed#
+             )]]>
+        </iterate>
+    </insert>
+
+    <update id="Calllimittimes-Update" parameterClass="Calllimittimes">
+        UPDATE calllimittimes SET
+        SupplierID = #supplierID#
+        , RestUrlID = #restUrlID#
+        , mtimes = #mtimes#
+        , htimes = #htimes#
+        , dtimes = #dtimes#
+        , IsUsed = #isUsed#
+        WHERE
+        (ID = #iD#)
+    </update>
+
+    <update id="Calllimittimes-UpdateByMap" parameterClass="java.util.Map">
+        UPDATE calllimittimes
+        <dynamic prepend="SET">
+            <isPropertyAvailable property="supplierID" prepend=",">
+                SupplierID = #supplierID#
+            </isPropertyAvailable>
+            <isPropertyAvailable property="restUrlID" prepend=",">
+                RestUrlID = #restUrlID#
+            </isPropertyAvailable>
+            <isPropertyAvailable property="mtimes" prepend=",">
+                mtimes = #mtimes#
+            </isPropertyAvailable>
+            <isPropertyAvailable property="htimes" prepend=",">
+                htimes = #htimes#
+            </isPropertyAvailable>
+            <isPropertyAvailable property="dtimes" prepend=",">
+                dtimes = #dtimes#
+            </isPropertyAvailable>
+            <isPropertyAvailable property="isUsed" prepend=",">
+                IsUsed = #isUsed#
+            </isPropertyAvailable>
+        </dynamic>
+        WHERE
+        (ID = #iD#)
+    </update>
+
+    <update id="Calllimittimes-UpdateDynamic" parameterClass="Calllimittimes">
+        UPDATE calllimittimes
+        <dynamic prepend="SET">
+            <isNotNull prepend="," property="supplierID">SupplierID = #supplierID#</isNotNull>
+            <isNotNull prepend="," property="restUrlID">RestUrlID = #restUrlID#</isNotNull>
+            <isNotNull prepend="," property="mtimes">mtimes = #mtimes#</isNotNull>
+            <isNotNull prepend="," property="htimes">htimes = #htimes#</isNotNull>
+            <isNotNull prepend="," property="dtimes">dtimes = #dtimes#</isNotNull>
+            <isNotNull prepend="," property="isUsed">IsUsed = #isUsed#</isNotNull>
+        </dynamic>
+        WHERE
+        (ID = #iD#)
+    </update>
+
+    <delete id="Calllimittimes-Delete" parameterClass="Calllimittimes">
+        DELETE FROM calllimittimes
+        WHERE
+        (ID = #iD#)
+    </delete>
+
+    <select id="Calllimittimes-Select" parameterClass="java.util.Map" resultMap="Calllimittimes-FullResultMap">
+        <!--mysql-->
+        SELECT
+        ID
+        , SupplierID
+        , RestUrlID
+        , mtimes
+        , htimes
+        , dtimes
+        , IsUsed
+        FROM calllimittimes
+        <dynamic prepend="WHERE">
+            <isPropertyAvailable prepend="and" property="iDList">
+                ID in
+                <iterate property="iDList" open="(" close=")" conjunction=",">
+                    <![CDATA[#iDList[]#]]>
+                </iterate>
+            </isPropertyAvailable>
+            <isPropertyAvailable property="supplierID" prepend="and">
+                SupplierID = #supplierID#
+            </isPropertyAvailable>
+            <isPropertyAvailable property="restUrlID" prepend="and">
+                RestUrlID = #restUrlID#
+            </isPropertyAvailable>
+            <isPropertyAvailable property="mtimes" prepend="and">
+                mtimes = #mtimes#
+            </isPropertyAvailable>
+            <isPropertyAvailable property="htimes" prepend="and">
+                htimes = #htimes#
+            </isPropertyAvailable>
+            <isPropertyAvailable property="dtimes" prepend="and">
+                dtimes = #dtimes#
+            </isPropertyAvailable>
+            <isPropertyAvailable property="isUsed" prepend="and">
+                IsUsed = #isUsed#
+            </isPropertyAvailable>
+        </dynamic>
+        <isPropertyAvailable property="OrderBy">
+            ORDER BY $OrderBy$
+        </isPropertyAvailable>
+        <dynamic prepend="LIMIT">
+            <isPropertyAvailable prepend="," property="Start">
+                #Start#
+            </isPropertyAvailable>
+            <isPropertyAvailable prepend="," property="End">
+                #End#
+            </isPropertyAvailable>
+        </dynamic>
+    </select>
+
+    <select id="Calllimittimes-SelectPager" parameterClass="java.util.Map" resultMap="Calllimittimes-FullResultMap">
+        <!--mysql-->
+        SELECT
+        ID
+        , SupplierID
+        , RestUrlID
+        , mtimes
+        , htimes
+        , dtimes
+        , IsUsed
+        FROM calllimittimes
+        <dynamic prepend="WHERE">
+            <isPropertyAvailable property="supplierID" prepend="and">
+                SupplierID = #supplierID#
+            </isPropertyAvailable>
+            <isPropertyAvailable property="restUrlID" prepend="and">
+                RestUrlID = #restUrlID#
+            </isPropertyAvailable>
+            <isPropertyAvailable property="mtimes" prepend="and">
+                mtimes = #mtimes#
+            </isPropertyAvailable>
+            <isPropertyAvailable property="htimes" prepend="and">
+                htimes = #htimes#
+            </isPropertyAvailable>
+            <isPropertyAvailable property="dtimes" prepend="and">
+                dtimes = #dtimes#
+            </isPropertyAvailable>
+            <isPropertyAvailable property="isUsed" prepend="and">
+                IsUsed = #isUsed#
+            </isPropertyAvailable>
+        </dynamic>
+        <isPropertyAvailable property="OrderBy">
+            ORDER BY $OrderBy$
+        </isPropertyAvailable>
+        <dynamic prepend="LIMIT">
+            <isPropertyAvailable prepend="," property="Start">
+                #Start#
+            </isPropertyAvailable>
+            <isPropertyAvailable prepend="," property="End">
+                #End#
+            </isPropertyAvailable>
+        </dynamic>
+    </select>
+
+</sqlMap>
