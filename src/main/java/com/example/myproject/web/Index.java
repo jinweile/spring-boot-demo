@@ -3,6 +3,7 @@ package com.example.myproject.web;
 import com.example.myproject.db.service.intf.ICalllimittimesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,12 +21,16 @@ import java.util.Map;
 public class Index {
 
     @Autowired
-    @Qualifier("ICalllimittimesService")
+    //@Qualifier("ICalllimittimesService")
     private ICalllimittimesService service;
+
+    @Autowired
+    private Environment env;
 
     @RequestMapping("/")
     //@ResponseBody
     public ModelAndView home() throws SQLException {
+        System.out.println("=========" + env.getProperty("abc") + "=========");
         int count = service.GetCount(null);
         System.out.println("==============count:" + count + "=============");
         Map map = new HashMap();

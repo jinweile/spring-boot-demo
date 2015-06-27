@@ -51,22 +51,22 @@
     </bean>
     <!-- DBCP方式配置数据源End -->
     <!-- 事务配置Start -->
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-    <bean id="transactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
-        <property name="transactionManager">
-            <ref local="transactionManager"/>
-        </property>
-        <property name="transactionAttributes">
-            <props>
-                <prop key="Insert*">PROPAGATION_REQUIRED,-Exception</prop>
-                <prop key="Update*">PROPAGATION_REQUIRED,-Exception</prop>
-                <prop key="Delete*">PROPAGATION_REQUIRED,-Exception</prop>
-                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
-            </props>
-        </property>
-    </bean>
+    <!--<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--</bean>-->
+    <!--<bean id="transactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">-->
+        <!--<property name="transactionManager">-->
+            <!--<ref local="transactionManager"/>-->
+        <!--</property>-->
+        <!--<property name="transactionAttributes">-->
+            <!--<props>-->
+                <!--<prop key="Insert*">PROPAGATION_REQUIRED,-Exception</prop>-->
+                <!--<prop key="Update*">PROPAGATION_REQUIRED,-Exception</prop>-->
+                <!--<prop key="Delete*">PROPAGATION_REQUIRED,-Exception</prop>-->
+                <!--<prop key="*">PROPAGATION_REQUIRED,readOnly</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+    <!--</bean>-->
     <!-- 事务配置End -->
     <!-- ibatis配置Start -->
     <bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
@@ -79,6 +79,6 @@
     </bean>
     <!-- ibatis配置End -->
     <!-- Dao和Service单独配置文件Start -->
-    <import resource="bean/CalllimittimesBean.xml"/>
+    <!--<import resource="bean/CalllimittimesBean.xml"/>-->
     <!-- Dao和Service单独配置文件End -->
 </beans>

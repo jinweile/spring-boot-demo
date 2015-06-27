@@ -3,6 +3,8 @@ package com.example.myproject.db.service.imp;
 import com.example.myproject.db.dao.intf.ICalllimittimesDao;
 import com.example.myproject.db.model.Calllimittimes;
 import com.example.myproject.db.service.intf.ICalllimittimesService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -12,18 +14,20 @@ import java.util.Map;
 /**
  * CalllimittimesService is the implementation of ICalllimittimesService
  */
+@Service
 public class CalllimittimesService implements ICalllimittimesService {
 
-    private ICalllimittimesDao dao = null;
+    @Autowired
+    private ICalllimittimesDao dao;
 
     /**
      * dao interface
      *
      * @param dao
      */
-    public void setCalllimittimesDao(ICalllimittimesDao dao) {
-        this.dao = dao;
-    }
+//    public void setCalllimittimesDao(ICalllimittimesDao dao) {
+//        this.dao = dao;
+//    }
 
     /**
      * Implements ICalllimittimesService.GetCount

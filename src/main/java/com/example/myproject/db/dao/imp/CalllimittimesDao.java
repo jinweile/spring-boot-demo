@@ -3,6 +3,9 @@ package com.example.myproject.db.dao.imp;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.example.myproject.db.dao.intf.ICalllimittimesDao;
 import com.example.myproject.db.model.Calllimittimes;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -12,18 +15,21 @@ import java.util.Map;
 /**
  * CalllimittimesDao is the implementation of ICalllimittimesDao
  */
+@Repository
+@Transactional
 public class CalllimittimesDao implements ICalllimittimesDao {
 
-    private SqlMapClient mapper = null;
+    @Autowired
+    private SqlMapClient mapper;
 
     /**
      * data map
      *
      * @param mapper
      */
-    public void setMapper(SqlMapClient mapper) {
-        this.mapper = mapper;
-    }
+//    public void setMapper(SqlMapClient mapper) {
+//        this.mapper = mapper;
+//    }
 
     /**
      * Implements ICalllimittimesDao.GetCount

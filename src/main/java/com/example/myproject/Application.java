@@ -1,9 +1,7 @@
 package com.example.myproject;
 
-import com.example.myproject.config.MvcConifg;
 import com.example.myproject.config.TestConfig;
 import org.springframework.boot.SpringApplication;
-
 import java.util.HashSet;
 import java.util.Set;
 
