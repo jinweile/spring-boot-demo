@@ -43,7 +43,8 @@ dependencies {
             "org.apache.ibatis:ibatis-sqlmap:2.3.4.726",
             "mysql:mysql-connector-java:5.1.21",
             "commons-dbcp:commons-dbcp:1.4",
-            "org.springframework:spring-orm:3.2.9.RELEASE"
+            "org.springframework:spring-orm:3.2.9.RELEASE",
+            "org.springframework:spring-webmvc-portlet:${springVersion}",
     )
     testCompile (
             "org.springframework.boot:spring-boot-starter-test:1.2.4.RELEASE",
