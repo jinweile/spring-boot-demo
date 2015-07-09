@@ -28,7 +28,7 @@ jar {
     /*baseName = 'myproject'
     version =  '0.0.1-SNAPSHOT'*/
     dependsOn copyResources,copyToLib
-    //exclude('**/bean','**/sqlmap','**/*.properties')
+    exclude('**/bean','**/sqlmap','**/*.properties')
 }
 
 sourceCompatibility = 1.7
