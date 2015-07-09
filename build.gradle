@@ -1,10 +1,35 @@
 apply plugin: 'java'
 /*apply plugin: 'spring-boot'*/
 
-/*jar {
-    baseName = 'myproject'
-    version =  '0.0.1-SNAPSHOT'
-}*/
+task copyResources( type: Copy ) {
+    into "$buildDir/shell/conf"
+    from "$buildDir/resources"
+    include('**/*.properties')
+    exclude('**/bean','**/sqlmap')
+}
+
+task copyLib( type: Copy ) {
+    into "$buildDir/shell/lib"
+    from "$buildDir/libs"
+}
+
+task copyToLib( type: Copy, dependsOn: copyLib ) {
+    into "$buildDir/shell/lib"
+    from configurations.compile
+}
+
+//task copy(type: Copy) {
+//    from 'resources'
+//    into 'conf'
+//    include('**/*.properties')
+//}
+
+jar {
+    /*baseName = 'myproject'
+    version =  '0.0.1-SNAPSHOT'*/
+    dependsOn copyResources,copyToLib
+    //exclude('**/bean','**/sqlmap','**/*.properties')
+}
 
 sourceCompatibility = 1.7
 version = '1.0'
@@ -50,11 +75,6 @@ dependencies {
             "org.springframework.boot:spring-boot-starter-test:1.2.4.RELEASE",
             'junit:junit:4.11'
     )
-}
-
-task copyResources( type: Copy ) {
-    //into "$buildDir/shell/conf"
-    //from "$buildDir/resources/main"
 }
 
 /*buildscript {
